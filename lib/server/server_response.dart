@@ -1,26 +1,27 @@
 import 'dart:convert';
 
-import 'package:shelf/shelf.dart';
+// ignore: depend_on_referenced_packages
+import 'package:shelf/shelf.dart' as shelf;
 
 class ServerResponse {
   static const _headers = {'content-type': 'application/json'};
-  static Response success() => Response.ok(
+  static shelf.Response success() => shelf.Response.ok(
         jsonEncode({"status_code": "200", "message": "Invan Communicator"}),
         headers: _headers,
       );
 
-  static Response notFound() => Response.notFound(
+  static shelf.Response notFound() => shelf.Response.notFound(
         jsonEncode({"status_code": "404", "message": "Not Found"}),
         headers: _headers,
       );
 
-  static Response badRequest(String message) => Response.ok(
+  static shelf.Response badRequest(String message) => shelf.Response.ok(
         jsonEncode({"error": true, "message": message}),
         headers: _headers,
       );
 
-  static Response initerenalServerError(String message) {
-    return Response.internalServerError(
+  static shelf.Response initerenalServerError(String message) {
+    return shelf.Response.internalServerError(
       body: jsonEncode({"status_code": 500, "message": message}),
       headers: _headers,
     );
